@@ -1,5 +1,5 @@
 import React from 'react'
-import {Title} from './Page.styled'
+import {Title} from './PageTitle.styled'
 
 // import PropTypes from 'prop-types'
 
