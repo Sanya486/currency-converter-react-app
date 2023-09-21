@@ -2,8 +2,7 @@ import React from 'react'
 import Table from "react-bootstrap/Table";
 // import PropTypes from 'prop-types'
 
-const CurrencyTable = props => {
-  return (
+const CurrencyTable = props =>  (
     <Table striped bordered hover>
       <thead>
         <tr>
@@ -33,7 +32,7 @@ const CurrencyTable = props => {
       </tbody>
     </Table>
   );
-}
+
 
 // CurrencyTable.propTypes = {
 
