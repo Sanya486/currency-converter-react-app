@@ -24,6 +24,11 @@ const CurrencyTable = props => {
           <td>USD</td>
           <td>37.7</td>
         </tr>
+        <tr>
+          <td>3</td>
+          <td>EUR</td>
+          <td>41.5</td>
+        </tr>
   
       </tbody>
     </Table>
