@@ -1,20 +1,37 @@
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import { NavLinkSt } from "../styled/Tabs.styled";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
-const Tabs = () => (
-  <Nav variant="tabs" defaultActiveKey="/converter">
-    <Nav.Item>
+
+const Navigation = () => (
+  <>
+    <DropdownButton id="dropdown-menu" title="Menu" className="d-sm-none">
       <LinkContainer to="/">
-        <NavLinkSt>Currency converter</NavLinkSt>
+        <Dropdown.Item as="button">Currency converter</Dropdown.Item>
       </LinkContainer>
-    </Nav.Item>
-    <Nav.Item>
       <LinkContainer to="/currency-list">
-        <NavLinkSt>List of Currencies</NavLinkSt>
+        <Dropdown.Item as="button">Exchange rates</Dropdown.Item>
       </LinkContainer>
-    </Nav.Item>
-  </Nav>
+    </DropdownButton>
+    <Nav
+      variant="tabs"
+      defaultActiveKey="/converter"
+      className="d-none d-sm-flex"
+    >
+      <Nav.Item>
+        <LinkContainer to="/">
+          <NavLinkSt>Currency converter</NavLinkSt>
+        </LinkContainer>
+      </Nav.Item>
+      <Nav.Item>
+        <LinkContainer to="/currency-list">
+          <NavLinkSt>Exchange rates</NavLinkSt>
+        </LinkContainer>
+      </Nav.Item>
+    </Nav>
+  </>
 );
 
-export default Tabs;
+export default Navigation;
