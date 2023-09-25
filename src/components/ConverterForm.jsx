@@ -1,41 +1,83 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Formik } from "formik";
 
 // import PropTypes from 'prop-types'
 
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import {
   LabelSt,
   FormWrap,
   ButtonSt,
   Text,
   DownArrowSt,
-} from '../styled/ConvertedForm.styled';
+} from "../styled/ConvertedForm.styled";
+import { useSelector } from "react-redux";
+import { selectCurrency, selectRates } from "redux/currencyConverter";
+import { Calculator } from "react-bootstrap-icons";
 
-const ConverterForm = () => (
-  <FormWrap>
-    <Form>
-      <Form.Group className="mb-3" controlId="formGroupEmail">
-        <LabelSt>Amount</LabelSt>
-        <Form.Control type="email" placeholder="Enter quantity" />
-      </Form.Group>
-      <Form.Group>
-        <LabelSt>Converted to</LabelSt>
-        <Form.Select aria-label="Currency list select">
-          <option>Click to choose currency</option>
-          <option value="1">USD</option>
-          <option value="2">UAH</option>
-          <option value="3">EUR</option>
-        </Form.Select>
-      </Form.Group>
-      <DownArrowSt size={23} />
-      <Text>1000UAH</Text>
+const ConverterForm = () => {
+  const [result, setResult] = useState();
+  const [convertedToCurrency, setConvertedToCurrency] = useState("");
+  const exchangeRates = useSelector(selectRates);
+  const currentCurrency = useSelector(selectCurrency);
+  return (
+    <>
+      <FormWrap>
+        <Formik
+          initialValues={{ inflowAmount: "0", convertedToCurrency: "" }}
+          onSubmit={(values) => {
+            if (values.convertedToCurrency === "") {
+              return
+            } 
+            const calc =
+              Number(values.inflowAmount) *
+              Number(exchangeRates[values.convertedToCurrency]);
+            setResult(calc);
+            setConvertedToCurrency(values.convertedToCurrency);
+          }}
+        >
+          {({ values, errors, touched, handleChange, handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formGroupEmail">
+                <LabelSt>Amount of {currentCurrency}</LabelSt>
+                <Form.Control
+                  type="number"
+                  name="inflowAmount"
+                  value={values.inflowAmount}
+                  placeholder="Enter quantity"
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              {errors.email && touched.email && errors.email}
+              <Form.Group>
+                <LabelSt>Converted to</LabelSt>
+                <Form.Select
+                  aria-label="Currency list select"
+                  name="convertedToCurrency"
+                  value={values.convertedToCurrency}
+                  onChange={handleChange}
+                >
+                  <option value="">Click to choose currency</option>
+                  <option value="USD">USD</option>
+                  <option value="UAH">UAH</option>
+                  <option value="EUR">EUR</option>
+                </Form.Select>
+              </Form.Group>
+              {errors.password && touched.password && errors.password}
 
-      <ButtonSt variant="primary" type="submit">
-        Convert
-      </ButtonSt>
-    </Form>
-  </FormWrap>
-);
+              <Text>
+                {result?.toFixed(2)} {convertedToCurrency}
+              </Text>
+              <ButtonSt variant="primary" type="submit">
+                <Calculator size={23} />
+              </ButtonSt>
+            </form>
+          )}
+        </Formik>
+      </FormWrap>
+    </>
+  );
+};
 
 // ConverterForm.propTypes = {
 
