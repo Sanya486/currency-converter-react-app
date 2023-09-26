@@ -7,10 +7,13 @@ import {
   FormWrap,
   ButtonSt,
   Text,
+  InfoText
 } from "../styled/ConvertedForm.styled";
+import { ErrorTextSt } from "styled/ErrorText";
 import { useSelector } from "react-redux";
 import { selectCurrency, selectRates } from "redux/currencyConverter";
 import { Calculator } from "react-bootstrap-icons";
+import { convertFormValidation } from "utils/validation";
 
 const ConverterForm = () => {
   const [result, setResult] = useState();
@@ -20,8 +23,12 @@ const ConverterForm = () => {
   return (
     <>
       <FormWrap>
+        {!currentCurrency && (
+          <InfoText>Please choose your currency...</InfoText>
+        )}
         <Formik
-          initialValues={{ inflowAmount: "0", convertedToCurrency: "" }}
+          initialValues={{ inflowAmount: 0, convertedToCurrency: "" }}
+          validationSchema={convertFormValidation}
           onSubmit={(values) => {
             if (values.convertedToCurrency === "") {
               return;
@@ -44,8 +51,11 @@ const ConverterForm = () => {
                   placeholder="Enter quantity"
                   onChange={handleChange}
                 />
+                {errors.inflowAmount && touched.inflowAmount && (
+                  <ErrorTextSt>{errors.inflowAmount}</ErrorTextSt>
+                )}
               </Form.Group>
-              {errors.email && touched.email && errors.email}
+
               <Form.Group>
                 <LabelSt>Converted to</LabelSt>
                 <Form.Select
@@ -59,12 +69,19 @@ const ConverterForm = () => {
                   <option value="UAH">UAH</option>
                   <option value="EUR">EUR</option>
                 </Form.Select>
+                {errors.convertedToCurrency && touched.convertedToCurrency && (
+                  <ErrorTextSt>{errors.convertedToCurrency}</ErrorTextSt>
+                )}
               </Form.Group>
-              {errors.password && touched.password && errors.password}
+
               <Text>
                 {result?.toFixed(2)} {convertedToCurrency}
               </Text>
-              <ButtonSt variant="primary" type="submit">
+              <ButtonSt
+                disabled={!currentCurrency}
+                variant="primary"
+                type="submit"
+              >
                 <Calculator size={23} />
               </ButtonSt>
             </form>

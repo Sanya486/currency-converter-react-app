@@ -7,6 +7,7 @@ import { Wrap, LabelSt } from "../styled/CurrencySecelor.styled";
 import {
   CHANGE_CURRENCY,
   FETCH_RATES,
+  RESET_CURRENCY,
   selectCurrency,
 } from "redux/currencyConverter";
 
@@ -17,7 +18,9 @@ const CurrencySelector = () => {
 
   const handleCurrencySelect = (e) => {
     const { value } = e.target;
-    if (value === "") return;
+    if (value === "") {
+      dispatch(RESET_CURRENCY())
+    };
     dispatch(CHANGE_CURRENCY(value));
     dispatch(FETCH_RATES(value));
   };

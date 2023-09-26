@@ -19,9 +19,7 @@ export const FormWrap = styled.div`
   border-radius: 20px;
   border-color: linear-gradient(90deg, #0019ff 0%, #b700ff 80%);
   box-shadow: -1px 11px 42px 0px rgba(0, 0, 0, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
 `;
 
 export const ButtonSt = styled(Button)`
@@ -45,4 +43,9 @@ export const DownArrowSt = styled(ArrowDownSquare)`
   display: block;
   margin: 20px auto;
   color: ${(props) => props.theme.color};
+`;
+
+export const InfoText = styled.p`
+  font-size: 14px;
+  font-weight: 400;
 `;

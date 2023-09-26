@@ -16,6 +16,9 @@ export const FETCH_RATES_SUCCEEDED = createAction(
 export const FETCH_RATES_FAILED = createAction(
   "currency-converter/reducer/FETCH_RATES_FAILED"
 );
+export const RESET_CURRENCY = createAction(
+  "currency-converter/reducer/RESET_CURRENCY"
+);
 
 // Selectors
 
@@ -65,5 +68,10 @@ export const reducer = createReducer(initialState, (builder) => {
         ...state,
         currency: payload,
       };
+    }).addCase(RESET_CURRENCY, (state, { payload }) => {
+      return {
+        ...state,
+        curreny: ""
+      }
     });
 });
