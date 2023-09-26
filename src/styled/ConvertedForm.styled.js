@@ -19,7 +19,6 @@ export const FormWrap = styled.div`
   border-radius: 20px;
   border-color: linear-gradient(90deg, #0019ff 0%, #b700ff 80%);
   box-shadow: -1px 11px 42px 0px rgba(0, 0, 0, 0.75);
-
 `;
 
 export const ButtonSt = styled(Button)`
@@ -48,4 +47,16 @@ export const DownArrowSt = styled(ArrowDownSquare)`
 export const InfoText = styled.p`
   font-size: 14px;
   font-weight: 400;
+`;
+
+export const FormControlSt = styled(Form.Control)`
+  appearance: none;
+  &:-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  &:-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;

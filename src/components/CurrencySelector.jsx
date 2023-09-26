@@ -9,12 +9,14 @@ import {
   FETCH_RATES,
   RESET_CURRENCY,
   selectCurrency,
+  selectCurrencyList,
 } from "redux/currencyConverter";
 
 const CurrencySelector = () => {
   const dispatch = useDispatch();
 
   const currentCurrency = useSelector(selectCurrency);
+  const currencyList = useSelector(selectCurrencyList)
 
   const handleCurrencySelect = (e) => {
     const { value } = e.target;
@@ -35,9 +37,7 @@ const CurrencySelector = () => {
           onChange={handleCurrencySelect}
         >
           <option value="">Click to choose currency</option>
-          <option value="USD">USD</option>
-          <option value="UAH">UAH</option>
-          <option value="EUR">EUR</option>
+          {currencyList && currencyList.map(currency => (<option value={currency[0]}>{ currency.join(' | ')}</option>))}
         </Form.Select>
       </Form.Group>
     </Wrap>

@@ -7,11 +7,16 @@ import {
   FormWrap,
   ButtonSt,
   Text,
-  InfoText
+  InfoText,
+  FormControlSt,
 } from "../styled/ConvertedForm.styled";
 import { ErrorTextSt } from "styled/ErrorText";
 import { useSelector } from "react-redux";
-import { selectCurrency, selectRates } from "redux/currencyConverter";
+import {
+  selectCurrency,
+  selectCurrencyList,
+  selectRates,
+} from "redux/currencyConverter";
 import { Calculator } from "react-bootstrap-icons";
 import { convertFormValidation } from "utils/validation";
 
@@ -20,6 +25,7 @@ const ConverterForm = () => {
   const [convertedToCurrency, setConvertedToCurrency] = useState("");
   const exchangeRates = useSelector(selectRates);
   const currentCurrency = useSelector(selectCurrency);
+  const currencyList = useSelector(selectCurrencyList);
   return (
     <>
       <FormWrap>
@@ -27,7 +33,7 @@ const ConverterForm = () => {
           <InfoText>Please choose your currency...</InfoText>
         )}
         <Formik
-          initialValues={{ inflowAmount: 0, convertedToCurrency: "" }}
+          initialValues={{ inflowAmount: "", convertedToCurrency: "" }}
           validationSchema={convertFormValidation}
           onSubmit={(values) => {
             if (values.convertedToCurrency === "") {
@@ -44,7 +50,7 @@ const ConverterForm = () => {
             <form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formGroupEmail">
                 <LabelSt>Amount of {currentCurrency}</LabelSt>
-                <Form.Control
+                <FormControlSt
                   type="number"
                   name="inflowAmount"
                   value={values.inflowAmount}
@@ -55,7 +61,6 @@ const ConverterForm = () => {
                   <ErrorTextSt>{errors.inflowAmount}</ErrorTextSt>
                 )}
               </Form.Group>
-
               <Form.Group>
                 <LabelSt>Converted to</LabelSt>
                 <Form.Select
@@ -65,9 +70,12 @@ const ConverterForm = () => {
                   onChange={handleChange}
                 >
                   <option value="">Click to choose currency</option>
-                  <option value="USD">USD</option>
-                  <option value="UAH">UAH</option>
-                  <option value="EUR">EUR</option>
+                  {currencyList &&
+                    currencyList.map((currency) => (
+                      <option value={currency[0]}>
+                        {currency.join(" | ")}
+                      </option>
+                    ))}
                 </Form.Select>
                 {errors.convertedToCurrency && touched.convertedToCurrency && (
                   <ErrorTextSt>{errors.convertedToCurrency}</ErrorTextSt>

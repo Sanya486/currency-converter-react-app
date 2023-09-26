@@ -1,9 +1,23 @@
-import { Layout } from "components";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import GlobalStyle from "globalStyles";
-import { Converter, CurrencyList } from "pages";
+
 import { Navigate, Route, Routes } from "react-router-dom";
 
-const App = () => (
+import { Converter, CurrencyList } from "pages";
+import { Layout } from "components";
+
+import { FETCH_CURRENCY_LIST } from "redux/currencyConverter";
+
+const App = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(FETCH_CURRENCY_LIST());
+  }, [dispatch]);
+
+  return (
   <>
     <GlobalStyle />
     <Routes>
@@ -14,6 +28,6 @@ const App = () => (
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   </>
-);
+)};
 
 export default App;
