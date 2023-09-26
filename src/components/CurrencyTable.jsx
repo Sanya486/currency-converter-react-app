@@ -1,13 +1,14 @@
-import React from 'react'
-import Table from "react-bootstrap/Table";
-import { useSelector } from 'react-redux';
-import { selectCurrency, selectRates } from 'redux/currencyConverter';
-// import PropTypes from 'prop-types'
+import React from "react";
+import { useSelector } from "react-redux";
 
-const CurrencyTable = props => {
-  const ratesList = useSelector(selectRates)
-const currentCurrency = useSelector(selectCurrency)
-  
+import Table from "react-bootstrap/Table";
+
+import { selectCurrency, selectRates } from "redux/currencyConverter";
+
+const CurrencyTable = () => {
+  const ratesList = useSelector(selectRates);
+  const currentCurrency = useSelector(selectCurrency);
+
   return (
     <Table striped bordered hover>
       <thead>
@@ -30,11 +31,7 @@ const currentCurrency = useSelector(selectCurrency)
           })}
       </tbody>
     </Table>
-  );}
+  );
+};
 
-
-// CurrencyTable.propTypes = {
-
-// }
-
-export default CurrencyTable
+export default CurrencyTable;

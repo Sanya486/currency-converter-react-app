@@ -1,15 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Form } from "react-bootstrap";
+
+import { Wrap, LabelSt } from "../styled/CurrencySecelor.styled";
+
 import {
   CHANGE_CURRENCY,
   FETCH_RATES,
   selectCurrency,
 } from "redux/currencyConverter";
-import { Form } from "react-bootstrap";
-import { Wrap, LabelSt } from "../styled/CurrencySecelor.styled";
-// import PropTypes from 'prop-types'
 
-const CurrencySelector = (props) => {
+const CurrencySelector = () => {
   const dispatch = useDispatch();
 
   const currentCurrency = useSelector(selectCurrency);
@@ -39,9 +40,5 @@ const CurrencySelector = (props) => {
     </Wrap>
   );
 };
-
-// CurrencySelector.propTypes = {
-
-// }
 
 export default CurrencySelector;

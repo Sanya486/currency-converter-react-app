@@ -1,8 +1,8 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Navigation from "./Tabs";
 import { Container } from "react-bootstrap";
-// import { Container } from "./Layout.styled";
+
+import Navigation from "./Tabs";
 
 const Layout = () => (
   <Container>

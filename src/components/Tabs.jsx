@@ -1,9 +1,9 @@
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
-import { NavLinkSt } from "../styled/Tabs.styled";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
+import { NavLinkSt } from "../styled/Tabs.styled";
 
 const Navigation = () => (
   <>

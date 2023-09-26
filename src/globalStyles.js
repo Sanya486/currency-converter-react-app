@@ -5,8 +5,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 10px;
     font-family: 'Roboto', sans-serif;
-  }
-  
-`;
+  }`;
 
 export default GlobalStyle;

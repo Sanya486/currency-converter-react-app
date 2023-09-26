@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 
-// import PropTypes from 'prop-types'
-
 import Form from "react-bootstrap/Form";
 import {
   LabelSt,
   FormWrap,
   ButtonSt,
   Text,
-  DownArrowSt,
 } from "../styled/ConvertedForm.styled";
 import { useSelector } from "react-redux";
 import { selectCurrency, selectRates } from "redux/currencyConverter";
@@ -27,8 +24,8 @@ const ConverterForm = () => {
           initialValues={{ inflowAmount: "0", convertedToCurrency: "" }}
           onSubmit={(values) => {
             if (values.convertedToCurrency === "") {
-              return
-            } 
+              return;
+            }
             const calc =
               Number(values.inflowAmount) *
               Number(exchangeRates[values.convertedToCurrency]);
@@ -64,7 +61,6 @@ const ConverterForm = () => {
                 </Form.Select>
               </Form.Group>
               {errors.password && touched.password && errors.password}
-
               <Text>
                 {result?.toFixed(2)} {convertedToCurrency}
               </Text>
@@ -78,9 +74,5 @@ const ConverterForm = () => {
     </>
   );
 };
-
-// ConverterForm.propTypes = {
-
-// }
 
 export default ConverterForm;
