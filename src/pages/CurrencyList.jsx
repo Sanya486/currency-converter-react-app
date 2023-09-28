@@ -1,19 +1,14 @@
-import React from 'react'
-import CurrencySelector from '../components/CurrencySelector/CurrencySelector'
-import CurrencyTable from '../components/CurrencyTable/CurrencyTable'
-// import PropTypes from 'prop-types'
+import React from "react";
 
-const CurrencyList = props => {
+import { CurrencySelector, CurrencyTable } from "components";
+
+const CurrencyList = () => {
   return (
     <>
       <CurrencySelector />
-      <CurrencyTable/>
+      <CurrencyTable />
     </>
-  )
-}
+  );
+};
 
-// CurrencyList.propTypes = {
-
-// }
-
-export default CurrencyList
+export default CurrencyList;
