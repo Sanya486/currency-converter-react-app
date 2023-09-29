@@ -1,44 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import { Formik } from "formik";
 
 import Form from "react-bootstrap/Form";
-import {
-  LabelSt,
-  FormWrap,
-  ButtonSt,
-  Text,
-  InfoText,
-  FormControlSt,
-} from "../styled/ConvertedForm.styled";
+import { LabelSt, FormWrap, ButtonSt, Text, InfoText, FormControlSt } from "../styled/ConvertedForm.styled";
 import { ErrorTextSt } from "styled/ErrorText";
 import { useSelector } from "react-redux";
-import {
-  selectCurrency,
-  selectCurrencyList,
-  selectRates,
-} from "redux/currencyConverter";
+import { selectCurrency, selectCurrencyList, selectRates } from "redux/currencyConverter";
 import { Calculator } from "react-bootstrap-icons";
 import { convertFormValidation } from "utils/validation";
+
+import { Currency } from "redux/currencyConverter";
 
 interface CurrencyConverterState {
   inflowAmount: string;
   convertedToCurrency: string;
 }
 
-const ConverterForm = () => {
+const ConverterForm: FC = () => {
   const [result, setResult] = useState<number | undefined>();
   const [convertedToCurrency, setConvertedToCurrency] = useState<string>("");
   const exchangeRates: any = useSelector(selectRates);
   const currentCurrency: string | null = useSelector(selectCurrency);
-  const currencyList: string[] | null = useSelector(selectCurrencyList) as
-    | string[]
-    | null;
+  const currencyList: Currency[] | null = useSelector(selectCurrencyList);
   return (
     <>
       <FormWrap>
-        {!currentCurrency && (
-          <InfoText>Please choose your currency...</InfoText>
-        )}
+        {!currentCurrency && <InfoText>Please choose your currency...</InfoText>}
         <Formik
           initialValues={{ inflowAmount: "", convertedToCurrency: "" }}
           validationSchema={convertFormValidation}
@@ -46,9 +33,7 @@ const ConverterForm = () => {
             if (values.convertedToCurrency === "") {
               return;
             }
-            const calc =
-              Number(values.inflowAmount) *
-              Number(exchangeRates[values.convertedToCurrency]);
+            const calc = Number(values.inflowAmount) * Number(exchangeRates[values.convertedToCurrency]);
             setResult(calc);
             setConvertedToCurrency(values.convertedToCurrency);
           }}
@@ -64,9 +49,7 @@ const ConverterForm = () => {
                   placeholder="Enter quantity"
                   onChange={handleChange}
                 />
-                {errors.inflowAmount && touched.inflowAmount && (
-                  <ErrorTextSt>{errors.inflowAmount}</ErrorTextSt>
-                )}
+                {errors.inflowAmount && touched.inflowAmount && <ErrorTextSt>{errors.inflowAmount}</ErrorTextSt>}
               </Form.Group>
               <Form.Group>
                 <LabelSt>Converted to</LabelSt>
@@ -78,13 +61,11 @@ const ConverterForm = () => {
                 >
                   <option value="">Click to choose currency</option>
                   {currencyList &&
-                    currencyList.map(
-                      (currency: any, index) => (
-                        <option key={index} value={currency[0]}>
-                          {currency.join(" | ")}
-                        </option>
-                      )
-                    )}
+                    currencyList.map((currency: string[], index: number) => (
+                      <option key={index} value={currency[0]}>
+                        {currency.join(" | ")}
+                      </option>
+                    ))}
                 </Form.Select>
                 {errors.convertedToCurrency && touched.convertedToCurrency && (
                   <ErrorTextSt>{errors.convertedToCurrency}</ErrorTextSt>
@@ -94,11 +75,7 @@ const ConverterForm = () => {
               <Text>
                 {result?.toFixed(2)} {convertedToCurrency}
               </Text>
-              <ButtonSt
-                disabled={!currentCurrency}
-                variant="primary"
-                type="submit"
-              >
+              <ButtonSt disabled={!currentCurrency} variant="primary" type="submit">
                 <Calculator size={23} />
               </ButtonSt>
             </form>

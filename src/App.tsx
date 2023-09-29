@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import GlobalStyle from "globalStyles";
 
@@ -9,25 +9,25 @@ import { Layout } from "components";
 
 import { FETCH_CURRENCY_LIST } from "redux/currencyConverter";
 
-const App: React.FC = () => {
-
-  const dispatch = useDispatch()
+const App: FC = () => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(FETCH_CURRENCY_LIST());
   }, [dispatch]);
 
   return (
-  <>
-    <GlobalStyle />
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Converter />} />
-        <Route path="/currency-list" element={<CurrencyList />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-  </>
-)};
+    <>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Converter />} />
+          <Route path="/currency-list" element={<CurrencyList />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </>
+  );
+};
 
 export default App;

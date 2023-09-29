@@ -6,48 +6,36 @@ import fetchCurrencyList from "api/fetchCurrencyList";
 
 // Types
 
+export type Currency = [string, string];
+
 type State = {
   currency: string;
-  currencyList: string[] | null;
-  exchangeRates: object;
+  currencyList: Array<Currency> | null;
+  exchangeRates: object | null;
   error: string;
 };
 // Actions
 
-export const CHANGE_CURRENCY = createAction<string>(
-  "currency-converter/reducer/CHANGE_CURRENCY"
-);
-export const FETCH_RATES = createAction<string>(
-  "currency-converter/reducer/FETCH_RATES"
-);
-export const FETCH_RATES_SUCCEEDED = createAction<object>(
-  "currency-converter/reducer/FETCH_RATES_SUCCEEDED"
-);
-export const FETCH_RATES_FAILED = createAction<string>(
-  "currency-converter/reducer/FETCH_RATES_FAILED"
-);
-export const RESET_CURRENCY = createAction(
-  "currency-converter/reducer/RESET_CURRENCY"
-);
-export const FETCH_CURRENCY_LIST = createAction(
-  "currency-converter/reducer/FETCH_CURRENCY_LIST"
-);
-export const FETCH_CURRENCY_LIST_SUCCEEDED = createAction<string[]>(
+export const CHANGE_CURRENCY = createAction<string>("currency-converter/reducer/CHANGE_CURRENCY");
+export const FETCH_RATES = createAction<string>("currency-converter/reducer/FETCH_RATES");
+export const FETCH_RATES_SUCCEEDED = createAction<object>("currency-converter/reducer/FETCH_RATES_SUCCEEDED");
+export const FETCH_RATES_FAILED = createAction<string>("currency-converter/reducer/FETCH_RATES_FAILED");
+export const RESET_CURRENCY = createAction("currency-converter/reducer/RESET_CURRENCY");
+export const FETCH_CURRENCY_LIST = createAction("currency-converter/reducer/FETCH_CURRENCY_LIST");
+export const FETCH_CURRENCY_LIST_SUCCEEDED = createAction<Array<Currency>>(
   "currency-converter/reducer/FETCH_CURRENCY_LIST_SUCCEEDED"
 );
-export const FETCH_CURRENCY_LIST_FAILED = createAction<string>(
-  "currency-converter/reducer/FETCH_CURRENCY_LIST_FAILED"
-);
+export const FETCH_CURRENCY_LIST_FAILED = createAction<string>("currency-converter/reducer/FETCH_CURRENCY_LIST_FAILED");
 
 // Selectors
 
-export const selectRates: (state: State) => {} = (state) => state.exchangeRates;
+export const selectRates: (state: State) => object | null = (state) => state.exchangeRates;
 export const selectCurrency: (state: State) => string = (state) => state.currency;
-export const selectCurrencyList: (state: State) => string[] | null = (state) => state.currencyList;
+export const selectCurrencyList: (state: State) => Array<Currency> | null = (state) => state.currencyList;
 
 // Initial state
 
-const initialState = {
+const initialState: State = {
   currency: "",
   currencyList: [],
   exchangeRates: {},
@@ -56,7 +44,7 @@ const initialState = {
 
 // Saga
 
-function* fetchRates(action: {type: string, payload: string }): Generator<unknown, any, object> {
+function* fetchRates(action: { type: string; payload: string }): Generator<unknown, any, object> {
   try {
     const rates = yield call(fetchExchangeRates, action.payload);
     yield put(FETCH_RATES_SUCCEEDED(rates));
@@ -65,7 +53,7 @@ function* fetchRates(action: {type: string, payload: string }): Generator<unknow
   }
 }
 
-function* fetchListOfCurrency(): Generator<unknown, any, string[]> {
+function* fetchListOfCurrency(): Generator<unknown, any, Array<Currency>> {
   try {
     const currencyList = yield call(fetchCurrencyList);
     yield put(FETCH_CURRENCY_LIST_SUCCEEDED(currencyList));
@@ -111,7 +99,7 @@ export const reducer = createReducer<State>(initialState, (builder) => {
         curreny: "",
       };
     })
-    .addCase(FETCH_CURRENCY_LIST_SUCCEEDED, (state, { payload }) => {
+    .addCase(FETCH_CURRENCY_LIST_SUCCEEDED, (state, { payload }: { payload: Array<Currency> }) => {
       return {
         ...state,
         currencyList: payload,
