@@ -9,7 +9,7 @@ import { Layout } from "components";
 
 import { FETCH_CURRENCY_LIST } from "redux/currencyConverter";
 
-const App = () => {
+const App: React.FC = () => {
 
   const dispatch = useDispatch()
 

@@ -20,12 +20,19 @@ import {
 import { Calculator } from "react-bootstrap-icons";
 import { convertFormValidation } from "utils/validation";
 
+interface CurrencyConverterState {
+  inflowAmount: string;
+  convertedToCurrency: string;
+}
+
 const ConverterForm = () => {
-  const [result, setResult] = useState();
-  const [convertedToCurrency, setConvertedToCurrency] = useState("");
-  const exchangeRates = useSelector(selectRates);
-  const currentCurrency = useSelector(selectCurrency);
-  const currencyList = useSelector(selectCurrencyList);
+  const [result, setResult] = useState<number | undefined>();
+  const [convertedToCurrency, setConvertedToCurrency] = useState<string>("");
+  const exchangeRates: any = useSelector(selectRates);
+  const currentCurrency: string | null = useSelector(selectCurrency);
+  const currencyList: string[] | null = useSelector(selectCurrencyList) as
+    | string[]
+    | null;
   return (
     <>
       <FormWrap>
@@ -35,7 +42,7 @@ const ConverterForm = () => {
         <Formik
           initialValues={{ inflowAmount: "", convertedToCurrency: "" }}
           validationSchema={convertFormValidation}
-          onSubmit={(values) => {
+          onSubmit={(values: CurrencyConverterState) => {
             if (values.convertedToCurrency === "") {
               return;
             }
@@ -71,11 +78,13 @@ const ConverterForm = () => {
                 >
                   <option value="">Click to choose currency</option>
                   {currencyList &&
-                    currencyList.map((currency) => (
-                      <option value={currency[0]}>
-                        {currency.join(" | ")}
-                      </option>
-                    ))}
+                    currencyList.map(
+                      (currency: any, index) => (
+                        <option key={index} value={currency[0]}>
+                          {currency.join(" | ")}
+                        </option>
+                      )
+                    )}
                 </Form.Select>
                 {errors.convertedToCurrency && touched.convertedToCurrency && (
                   <ErrorTextSt>{errors.convertedToCurrency}</ErrorTextSt>

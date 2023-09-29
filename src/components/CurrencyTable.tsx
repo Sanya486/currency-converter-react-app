@@ -20,7 +20,7 @@ const CurrencyTable = () => {
       </thead>
       <tbody>
         {ratesList &&
-          Object.entries(ratesList).map((currency, index) => {
+          Object.entries(ratesList).map((currency: any, index) => {
             return (
               <tr>
                 <td>{index + 1}</td>

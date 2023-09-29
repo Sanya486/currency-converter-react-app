@@ -2,7 +2,7 @@ import React from "react";
 
 import { CurrencySelector, CurrencyTable } from "components";
 
-const CurrencyList = () => {
+const CurrencyList: React.FC = () => {
   return (
     <>
       <CurrencySelector />

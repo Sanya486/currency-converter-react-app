@@ -1,3 +1,4 @@
+import React from "react";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -5,7 +6,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 import { NavLinkSt } from "../styled/Tabs.styled";
 
-const Navigation = () => (
+const Navigation: React.FC = () => (
   <>
     <DropdownButton id="dropdown-menu" title="Menu" className="d-sm-none">
       <LinkContainer to="/">

@@ -21,7 +21,7 @@ export const FormWrap = styled.div`
   box-shadow: -1px 11px 42px 0px rgba(0, 0, 0, 0.75);
 `;
 
-export const ButtonSt = styled(Button)`
+export const ButtonSt: any = styled(Button)`
   display: block;
   margin-left: auto;
   margin-right: auto;

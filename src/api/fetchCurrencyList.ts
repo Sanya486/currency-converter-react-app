@@ -6,5 +6,5 @@ export default async function fetchCurrencyList() {
   const response = await axios.get(
     `https://v6.exchangerate-api.com/v6/${API}/codes`
   );
-  return response.data;
+  return response.data.supported_codes;
 }
