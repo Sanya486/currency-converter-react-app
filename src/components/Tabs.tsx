@@ -1,3 +1,4 @@
+import React, { FC } from "react";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -5,7 +6,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 
 import { NavLinkSt } from "../styled/Tabs.styled";
 
-const Navigation = () => (
+const Navigation: FC = () => (
   <>
     <DropdownButton id="dropdown-menu" title="Menu" className="d-sm-none">
       <LinkContainer to="/">
@@ -15,11 +16,7 @@ const Navigation = () => (
         <Dropdown.Item as="button">Exchange rates</Dropdown.Item>
       </LinkContainer>
     </DropdownButton>
-    <Nav
-      variant="tabs"
-      defaultActiveKey="/converter"
-      className="d-none d-sm-flex"
-    >
+    <Nav variant="tabs" defaultActiveKey="/converter" className="d-none d-sm-flex">
       <Nav.Item>
         <LinkContainer to="/">
           <NavLinkSt>Currency converter</NavLinkSt>

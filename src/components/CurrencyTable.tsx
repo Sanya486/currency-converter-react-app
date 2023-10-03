@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
 import Table from "react-bootstrap/Table";
 
 import { selectCurrency, selectRates } from "redux/currencyConverter";
 
-const CurrencyTable = () => {
+const CurrencyTable: FC = () => {
   const ratesList = useSelector(selectRates);
   const currentCurrency = useSelector(selectCurrency);
 
@@ -20,7 +20,7 @@ const CurrencyTable = () => {
       </thead>
       <tbody>
         {ratesList &&
-          Object.entries(ratesList).map((currency, index) => {
+          Object.entries(ratesList).map((currency: any, index) => {
             return (
               <tr>
                 <td>{index + 1}</td>

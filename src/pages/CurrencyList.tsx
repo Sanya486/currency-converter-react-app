@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { CurrencySelector, CurrencyTable } from "components";
 
-const CurrencyList = () => {
+const CurrencyList: FC = () => {
   return (
     <>
       <CurrencySelector />
