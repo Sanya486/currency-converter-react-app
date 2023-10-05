@@ -62,7 +62,7 @@ const ConverterForm: FC = () => {
                   <option value="">Click to choose currency</option>
                   {currencyList &&
                     currencyList.map((currency: string[], index: number) => (
-                      <option key={index} value={currency[0]}>
+                      <option key={index} data-testid="option" value={currency[0]}>
                         {currency.join(" | ")}
                       </option>
                     ))}

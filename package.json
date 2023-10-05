@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://Sanya486.github.io/currency-converter-react-app/",
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.6",
     "@types/node": "^16.18.57",
@@ -51,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-typescript": "^7.23.0",

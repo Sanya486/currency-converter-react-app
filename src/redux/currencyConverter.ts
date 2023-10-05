@@ -8,7 +8,7 @@ import fetchCurrencyList from "../api/fetchCurrencyList";
 
 export type Currency = [string, string];
 
-type State = {
+export type State = {
   currency: string;
   currencyList: Array<Currency> | null;
   exchangeRates: object | null;
@@ -35,7 +35,7 @@ export const selectCurrencyList: (state: State) => Array<Currency> | null = (sta
 
 // Initial state
 
-const initialState: State = {
+export const initialState: State = {
   currency: "",
   currencyList: [],
   exchangeRates: {},
