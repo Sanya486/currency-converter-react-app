@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Currency } from "redux/currencyConverter";
+import { Currency } from "../redux/currencyConverter";
 const API = "39dd80977a3b1dca49099b95";
 
 export default async function fetchCurrencyList(): Promise<Currency[]> {

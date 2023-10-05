@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import { mySaga } from "redux/currencyConverter";
+import { mySaga } from "./currencyConverter";
 import { reducer } from "./currencyConverter";
 
 const sagaMiddleware = createSagaMiddleware();

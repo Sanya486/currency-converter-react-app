@@ -1,13 +1,13 @@
 import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import GlobalStyle from "globalStyles";
+import GlobalStyle from "./globalStyles";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { Converter, CurrencyList } from "pages";
-import { Layout } from "components";
+import { Converter, CurrencyList } from "./pages";
+import { Layout } from "./components";
 
-import { FETCH_CURRENCY_LIST } from "redux/currencyConverter";
+import { FETCH_CURRENCY_LIST } from "./redux/currencyConverter";
 
 const App: FC = () => {
   const dispatch = useDispatch();

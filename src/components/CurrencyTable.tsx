@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import Table from "react-bootstrap/Table";
 
-import { selectCurrency, selectRates } from "redux/currencyConverter";
+import { selectCurrency, selectRates } from "../redux/currencyConverter";
 
 const CurrencyTable: FC = () => {
   const ratesList = useSelector(selectRates);

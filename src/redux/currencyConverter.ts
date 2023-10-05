@@ -1,8 +1,8 @@
 // ============= Duck`s approach =============
 import { createReducer, createAction } from "@reduxjs/toolkit";
 import { call, put, takeEvery } from "redux-saga/effects";
-import fetchExchangeRates from "api/fetchExchangeRates";
-import fetchCurrencyList from "api/fetchCurrencyList";
+import fetchExchangeRates from "../api/fetchExchangeRates";
+import fetchCurrencyList from "../api/fetchCurrencyList";
 
 // Types
 

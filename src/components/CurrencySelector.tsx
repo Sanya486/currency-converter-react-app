@@ -10,7 +10,7 @@ import {
   RESET_CURRENCY,
   selectCurrency,
   selectCurrencyList,
-} from "redux/currencyConverter";
+} from "../redux/currencyConverter";
 
 const CurrencySelector: FC = () => {
   const dispatch = useDispatch();

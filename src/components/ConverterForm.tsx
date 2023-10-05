@@ -3,13 +3,13 @@ import { Formik } from "formik";
 
 import Form from "react-bootstrap/Form";
 import { LabelSt, FormWrap, ButtonSt, Text, InfoText, FormControlSt } from "../styled/ConvertedForm.styled";
-import { ErrorTextSt } from "styled/ErrorText";
+import { ErrorTextSt } from "../styled/ErrorText";
 import { useSelector } from "react-redux";
-import { selectCurrency, selectCurrencyList, selectRates } from "redux/currencyConverter";
+import { selectCurrency, selectCurrencyList, selectRates } from "../redux/currencyConverter";
 import { Calculator } from "react-bootstrap-icons";
-import { convertFormValidation } from "utils/validation";
+import { convertFormValidation } from "../utils/validation";
 
-import { Currency } from "redux/currencyConverter";
+import { Currency } from "../redux/currencyConverter";
 
 interface CurrencyConverterState {
   inflowAmount: string;
