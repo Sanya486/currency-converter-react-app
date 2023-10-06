@@ -1,6 +1,9 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import PageTitle from "./PageTitle";
 
-test("is PageTitle render", () => {
- render(<PageTitle title="Hello" />)
+describe("PageTitle tests", () => {
+    test("is PageTitle render", () => {
+        render(<PageTitle title="Hello" />)
+        expect(screen.getByRole('heading')).toHaveTextContent('Hello')
+    })
 })

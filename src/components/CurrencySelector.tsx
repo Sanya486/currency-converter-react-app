@@ -22,6 +22,7 @@ const CurrencySelector: FC = () => {
     const { value }: { value: string } = e.target;
     if (value === "") {
       dispatch(RESET_CURRENCY());
+      return
     }
     dispatch(CHANGE_CURRENCY(value));
     dispatch(FETCH_RATES(value));
@@ -31,7 +32,12 @@ const CurrencySelector: FC = () => {
     <Wrap>
       <Form.Group>
         <LabelSt>Select your currency</LabelSt>
-        <Form.Select aria-label="Currency list select" defaultValue={currentCurrency} onChange={handleCurrencySelect}>
+        <Form.Select
+          aria-label="Currency list select"
+          data-testid="select"
+          defaultValue={currentCurrency}
+          onChange={handleCurrencySelect}
+        >
           <option value="">Click to choose currency</option>
           {currencyList &&
             currencyList.map((currency: string[], index: number) => (

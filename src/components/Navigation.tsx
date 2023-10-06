@@ -16,7 +16,11 @@ const Navigation: FC = () => (
         <Dropdown.Item as="button">Exchange rates</Dropdown.Item>
       </LinkContainer>
     </DropdownButton>
-    <Nav variant="tabs" defaultActiveKey="/converter" className="d-none d-sm-flex">
+    <Nav
+      variant="tabs"
+      defaultActiveKey="/converter"
+      className="d-none d-sm-flex"
+    >
       <Nav.Item>
         <LinkContainer to="/">
           <NavLinkSt>Currency converter</NavLinkSt>

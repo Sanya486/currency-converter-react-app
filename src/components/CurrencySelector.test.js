@@ -3,17 +3,26 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import CurrencySelector from "./CurrencySelector";
 import { reducer } from "redux/currencyConverter";
+import { userEvent } from "@testing-library/user-event";
 
-describe("Converter Form testing", () => {
+
+describe("CurrencySelector tests", () => {
   let store;
+  let mockDispatch;
+  const initialState = {
+    currency: "USD",
+    currencyList: [
+      ["AED", "UAE Dirham"],
+      ["AFN", "Afghan "],
+    ],
+  };
   beforeAll(() => {
-    store = createStore(reducer, {
-      currency: "",
-      currencyList: [
-        ["AAA", "dsdadsa"],
-        ["bbbb", "bbbbbb"],
-      ],
-    });
+    store = createStore(reducer, initialState);
+    mockDispatch = jest.fn();
+    store.dispatch = mockDispatch;
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it("is Label of select exists", () => {
@@ -33,5 +42,25 @@ describe("Converter Form testing", () => {
     );
     const optionArray = await screen.findAllByTestId("option");
     optionArray.map((option) => expect(option).toBeInTheDocument());
+  });
+  it("test reset currency in the handleCurrencySelect", async () => {
+    render(
+      <Provider store={store}>
+        <CurrencySelector />
+      </Provider>
+    );
+    const selectElement = screen.getByTestId("select");
+    await userEvent.selectOptions(selectElement, "");
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+  });
+  it("test handleCurrencySelect function", async () => {
+    render(
+      <Provider store={store}>
+        <CurrencySelector />
+      </Provider>
+    );
+    const selectElement = screen.getByTestId("select");
+    await userEvent.selectOptions(selectElement, "AED");
+    expect(mockDispatch).toHaveBeenCalledTimes(2);
   });
 });

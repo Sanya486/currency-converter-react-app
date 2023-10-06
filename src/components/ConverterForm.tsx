@@ -30,9 +30,6 @@ const ConverterForm: FC = () => {
           initialValues={{ inflowAmount: "", convertedToCurrency: "" }}
           validationSchema={convertFormValidation}
           onSubmit={(values: CurrencyConverterState) => {
-            if (values.convertedToCurrency === "") {
-              return;
-            }
             const calc = Number(values.inflowAmount) * Number(exchangeRates[values.convertedToCurrency]);
             setResult(calc);
             setConvertedToCurrency(values.convertedToCurrency);
@@ -44,6 +41,7 @@ const ConverterForm: FC = () => {
                 <LabelSt>Amount of {currentCurrency}</LabelSt>
                 <FormControlSt
                   type="number"
+                  data-testid="currency-amount"
                   name="inflowAmount"
                   value={values.inflowAmount}
                   placeholder="Enter quantity"
@@ -55,6 +53,7 @@ const ConverterForm: FC = () => {
                 <LabelSt>Converted to</LabelSt>
                 <Form.Select
                   aria-label="Currency list select"
+                  data-testid="currency-select"
                   name="convertedToCurrency"
                   value={values.convertedToCurrency}
                   onChange={handleChange}
@@ -72,10 +71,10 @@ const ConverterForm: FC = () => {
                 )}
               </Form.Group>
 
-              <Text>
+              <Text data-testid="result">
                 {result?.toFixed(2)} {convertedToCurrency}
               </Text>
-              <ButtonSt disabled={!currentCurrency} variant="primary" type="submit">
+              <ButtonSt data-testid="btn-submit" disabled={!currentCurrency} variant="primary" type="submit">
                 <Calculator size={23} />
               </ButtonSt>
             </form>
