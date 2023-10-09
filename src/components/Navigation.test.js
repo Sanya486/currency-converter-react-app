@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import Navigation from "./Navigation";
 import userEvent from "@testing-library/user-event";
 
-
 describe("Navigation tests", () => {
   it("is active status of Tabs changing after click", async () => {
     render(<Navigation />, { wrapper: BrowserRouter });

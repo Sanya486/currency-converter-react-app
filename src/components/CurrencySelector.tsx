@@ -22,7 +22,7 @@ const CurrencySelector: FC = () => {
     const { value }: { value: string } = e.target;
     if (value === "") {
       dispatch(RESET_CURRENCY());
-      return
+      return;
     }
     dispatch(CHANGE_CURRENCY(value));
     dispatch(FETCH_RATES(value));

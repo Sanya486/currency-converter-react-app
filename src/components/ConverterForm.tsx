@@ -2,10 +2,21 @@ import React, { useState, FC } from "react";
 import { Formik } from "formik";
 
 import Form from "react-bootstrap/Form";
-import { LabelSt, FormWrap, ButtonSt, Text, InfoText, FormControlSt } from "../styled/ConvertedForm.styled";
+import {
+  LabelSt,
+  FormWrap,
+  ButtonSt,
+  Text,
+  InfoText,
+  FormControlSt,
+} from "../styled/ConvertedForm.styled";
 import { ErrorTextSt } from "../styled/ErrorText";
 import { useSelector } from "react-redux";
-import { selectCurrency, selectCurrencyList, selectRates } from "../redux/currencyConverter";
+import {
+  selectCurrency,
+  selectCurrencyList,
+  selectRates,
+} from "../redux/currencyConverter";
 import { Calculator } from "react-bootstrap-icons";
 import { convertFormValidation } from "../utils/validation";
 
@@ -25,12 +36,16 @@ const ConverterForm: FC = () => {
   return (
     <>
       <FormWrap>
-        {!currentCurrency && <InfoText>Please choose your currency...</InfoText>}
+        {!currentCurrency && (
+          <InfoText>Please choose your currency...</InfoText>
+        )}
         <Formik
           initialValues={{ inflowAmount: "", convertedToCurrency: "" }}
           validationSchema={convertFormValidation}
           onSubmit={(values: CurrencyConverterState) => {
-            const calc = Number(values.inflowAmount) * Number(exchangeRates[values.convertedToCurrency]);
+            const calc =
+              Number(values.inflowAmount) *
+              Number(exchangeRates[values.convertedToCurrency]);
             setResult(calc);
             setConvertedToCurrency(values.convertedToCurrency);
           }}
@@ -47,7 +62,9 @@ const ConverterForm: FC = () => {
                   placeholder="Enter quantity"
                   onChange={handleChange}
                 />
-                {errors.inflowAmount && touched.inflowAmount && <ErrorTextSt>{errors.inflowAmount}</ErrorTextSt>}
+                {errors.inflowAmount && touched.inflowAmount && (
+                  <ErrorTextSt>{errors.inflowAmount}</ErrorTextSt>
+                )}
               </Form.Group>
               <Form.Group>
                 <LabelSt>Converted to</LabelSt>
@@ -61,7 +78,11 @@ const ConverterForm: FC = () => {
                   <option value="">Click to choose currency</option>
                   {currencyList &&
                     currencyList.map((currency: string[], index: number) => (
-                      <option key={index} data-testid="option" value={currency[0]}>
+                      <option
+                        key={index}
+                        data-testid="option"
+                        value={currency[0]}
+                      >
                         {currency.join(" | ")}
                       </option>
                     ))}
@@ -74,7 +95,12 @@ const ConverterForm: FC = () => {
               <Text data-testid="result">
                 {result?.toFixed(2)} {convertedToCurrency}
               </Text>
-              <ButtonSt data-testid="btn-submit" disabled={!currentCurrency} variant="primary" type="submit">
+              <ButtonSt
+                data-testid="btn-submit"
+                disabled={!currentCurrency}
+                variant="primary"
+                type="submit"
+              >
                 <Calculator size={23} />
               </ButtonSt>
             </form>

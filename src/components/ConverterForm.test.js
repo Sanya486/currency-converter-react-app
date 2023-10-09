@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import ConverterForm from "./ConverterForm";
 import { reducer } from "redux/currencyConverter";
 
-
 describe("ConverterForm tests", () => {
   let store;
   const initialState = {
@@ -66,7 +65,9 @@ describe("ConverterForm tests", () => {
       </Provider>
     );
     fireEvent.click(screen.getByTestId("btn-submit"));
-    const error = await screen.findByText(/Enter amount of currency to convert/i);
+    const error = await screen.findByText(
+      /Enter amount of currency to convert/i
+    );
     expect(error).toBeInTheDocument();
   });
   it("is error 'Please choose currency to convert' visible if submit without covert-to-currency chosen", async () => {
@@ -92,8 +93,12 @@ describe("ConverterForm tests", () => {
         <ConverterForm />
       </Provider>
     );
-    fireEvent.change(screen.getByTestId("currency-amount"), { target: { value: "1000" } });
-    fireEvent.change(screen.getByTestId("currency-select"), { target: { value: "USD" } });
+    fireEvent.change(screen.getByTestId("currency-amount"), {
+      target: { value: "1000" },
+    });
+    fireEvent.change(screen.getByTestId("currency-select"), {
+      target: { value: "USD" },
+    });
     fireEvent.click(screen.getByTestId("btn-submit"));
     await waitFor(() => {
       expect(screen.getByTestId("result")).toHaveTextContent("37000.00");

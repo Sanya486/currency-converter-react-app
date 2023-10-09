@@ -36,7 +36,9 @@ describe("CurrencyTable tests", () => {
       </Provider>
     );
     const secondColumn = await screen.findAllByTestId("second-column");
-    secondColumn.map((item) => expect(initialState.exchangeRates[item.textContent]).not.toBeUndefined());
+    secondColumn.map((item) =>
+      expect(initialState.exchangeRates[item.textContent]).not.toBeUndefined()
+    );
   });
   it("is third column`s Table data locates properly", async () => {
     render(
@@ -47,7 +49,9 @@ describe("CurrencyTable tests", () => {
     const secondColumn = await screen.findAllByTestId("second-column");
     const thirdColumn = await screen.findAllByTestId("third-column");
     thirdColumn.map((item, index) =>
-      expect(item.textContent).toBe(String(initialState.exchangeRates[secondColumn[index].textContent]))
+      expect(item.textContent).toBe(
+        String(initialState.exchangeRates[secondColumn[index].textContent])
+      )
     );
   });
 });

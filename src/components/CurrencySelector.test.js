@@ -5,7 +5,6 @@ import CurrencySelector from "./CurrencySelector";
 import { reducer } from "redux/currencyConverter";
 import { userEvent } from "@testing-library/user-event";
 
-
 describe("CurrencySelector tests", () => {
   let store;
   let mockDispatch;
