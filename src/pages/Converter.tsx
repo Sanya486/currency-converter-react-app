@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { ConverterForm, PageTitle, CurrencySelector } from "components";
+import { ConverterForm, PageTitle, CurrencySelector } from "../components";
 
 const Converter: FC = () => (
   <>

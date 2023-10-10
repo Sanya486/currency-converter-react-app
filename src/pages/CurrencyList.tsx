@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { CurrencySelector, CurrencyTable } from "components";
+import { CurrencySelector, CurrencyTable } from "../components";
 
 const CurrencyList: FC = () => {
   return (
