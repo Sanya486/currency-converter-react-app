@@ -1,9 +1,10 @@
 import axios from "axios";
-import fetchCurrencyList from "./fetchCurrencyList";
+
+import fetchCurrencyList from "../../api/fetchCurrencyList";
 
 jest.mock("axios");
 
-it.only("fetchCurrencyList test", () => {
+it.only("should fetch list of currencies", () => {
   const resp = {
     data: {
       supported_codes: [

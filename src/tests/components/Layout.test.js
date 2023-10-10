@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Layout from "./Layout";
+
+import Layout from "../../components/Layout";
 
 describe("Layout tests", () => {
-  it("is Layout mounted", () => {
+  it("should Layout to be mounted", () => {
     render(<Layout />, { wrapper: BrowserRouter });
     expect(screen.getByTestId("layout-wrapper")).toBeInTheDocument();
   });

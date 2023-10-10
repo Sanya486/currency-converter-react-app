@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import CurrencyTable from "./CurrencyTable";
+
+import CurrencyTable from "../../components/CurrencyTable";
+
 import { reducer } from "redux/currencyConverter";
 
 describe("CurrencyTable tests", () => {
@@ -17,10 +19,12 @@ describe("CurrencyTable tests", () => {
       CNY: 6.9454,
     },
   };
+
   beforeAll(() => {
     store = createStore(reducer, initialState);
   });
-  it("is first column`s Table data locates properly", async () => {
+
+  it("should first column`s Table data to be properly exist", async () => {
     render(
       <Provider store={store}>
         <CurrencyTable />
@@ -29,7 +33,8 @@ describe("CurrencyTable tests", () => {
     const firstColumn = await screen.findAllByTestId("first-column");
     firstColumn.map((item, index) => expect(item).toHaveTextContent(index + 1));
   });
-  it("is second column`s Table data locates properly", async () => {
+
+  it("should second column`s Table data to be properly exist", async () => {
     render(
       <Provider store={store}>
         <CurrencyTable />
@@ -40,7 +45,8 @@ describe("CurrencyTable tests", () => {
       expect(initialState.exchangeRates[item.textContent]).not.toBeUndefined()
     );
   });
-  it("is third column`s Table data locates properly", async () => {
+
+  it("should third column`s Table data to be properly exist", async () => {
     render(
       <Provider store={store}>
         <CurrencyTable />

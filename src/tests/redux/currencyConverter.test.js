@@ -1,6 +1,7 @@
+import { call, put, takeEvery } from "redux-saga/effects";
+
 import fetchCurrencyList from "api/fetchCurrencyList";
 import fetchExchangeRates from "api/fetchExchangeRates";
-import { call, put, takeEvery } from "redux-saga/effects";
 import {
   CHANGE_CURRENCY,
   fetchListOfCurrency,
@@ -16,10 +17,10 @@ import {
   reducer,
   RESET_CURRENCY,
   watcher,
-} from "./currencyConverter";
+} from "../../redux/currencyConverter";
 
-describe("Fetch Rates generator testing", () => {
-  it("fetch rates success", () => {
+describe("fetchRates generator testing", () => {
+  it("should fetchRates to be success", () => {
     const action = {
       payload: "USD",
     };
@@ -33,7 +34,8 @@ describe("Fetch Rates generator testing", () => {
     );
     expect(generatorFn.next().done).toEqual(true);
   });
-  it("fetch fates fail", () => {
+
+  it("should fetchRates to be failed", () => {
     const action = {
       payload: "USD",
     };
@@ -47,8 +49,8 @@ describe("Fetch Rates generator testing", () => {
   });
 });
 
-describe("Fetch List of Currency generator testing", () => {
-  it("fetch rates success", () => {
+describe("fetchListOfCurrency generator testing", () => {
+  it("should fetchListOfCurrency to be success", () => {
     const generatorFn = fetchListOfCurrency();
     expect(generatorFn.next().value).toEqual(call(fetchCurrencyList));
     const currencyList = [
@@ -60,7 +62,8 @@ describe("Fetch List of Currency generator testing", () => {
     );
     expect(generatorFn.next().done).toEqual(true);
   });
-  it("fetch rates fail", () => {
+
+  it("should fetchListOfCurrency to be falied", () => {
     const generatorFn = fetchListOfCurrency();
     generatorFn.next();
     const errorMessage = "Request failed";
@@ -71,7 +74,7 @@ describe("Fetch List of Currency generator testing", () => {
   });
 });
 
-it("watcher test", () => {
+it("should saga-watcher to work properly", () => {
   const generatorFn = watcher();
   expect(generatorFn.next().value).toEqual(takeEvery(FETCH_RATES, fetchRates));
   expect(generatorFn.next().value).toEqual(
@@ -80,41 +83,45 @@ it("watcher test", () => {
   expect(generatorFn.next().done).toEqual(true);
 });
 
-it("mySage test", () => {
+it("should mySaga to work properly", () => {
   const generatorFn = mySaga();
   expect(generatorFn.next().value).toEqual(watcher());
   expect(generatorFn.next().done).toEqual(true);
 });
 
 describe("Reducer tests", () => {
-  it("FETCH_RATES_SUCCEEDED", () => {
+  it("should FETCH_RATES_SUCCEEDED works properly", () => {
     const rates = { UAH: 100 };
     expect(reducer(initialState, FETCH_RATES_SUCCEEDED(rates))).toMatchObject({
       ...initialState,
       exchangeRates: rates,
     });
   });
-  it("FETCH_RATES_FAILED", () => {
+
+  it("should FETCH_RATES_FAILED works properly", () => {
     const error = "Error";
     expect(reducer(initialState, FETCH_RATES_FAILED(error))).toMatchObject({
       ...initialState,
       error,
     });
   });
-  it("CHANGE_CURRENCY", () => {
+
+  it("should CHANGE_CURRENCY works properly", () => {
     const currency = "UAH";
     expect(reducer(initialState, CHANGE_CURRENCY(currency))).toMatchObject({
       ...initialState,
       currency,
     });
   });
-  it("RESET_CURRENCY", () => {
+
+  it("should RESET_CURRENCY works properly", () => {
     expect(reducer(initialState, RESET_CURRENCY())).toMatchObject({
       ...initialState,
       currency: "",
     });
   });
-  it("FETCH_CURRENCY_LIST_SUCCEEDED", () => {
+
+  it("should FETCH_CURRENCY_LIST_SUCCEEDED works properly", () => {
     const currencyList = [
       ["AED", "UAE Dirham"],
       ["AFN", "Afghan Afghani"],
@@ -126,7 +133,8 @@ describe("Reducer tests", () => {
       currencyList,
     });
   });
-  it("FETCH_CURRENCY_LIST_FAILED", () => {
+
+  it("should FETCH_CURRENCY_LIST_FAILED works properly", () => {
     const error = "Error";
     expect(
       reducer(initialState, FETCH_CURRENCY_LIST_FAILED(error))

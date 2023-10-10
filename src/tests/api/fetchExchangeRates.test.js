@@ -1,9 +1,10 @@
 import axios from "axios";
-import fetchExchangeRates from "./fetchExchangeRates";
+
+import fetchExchangeRates from "../../api/fetchExchangeRates";
 
 jest.mock("axios");
 
-it.only("fetchCurrencyList test", () => {
+it.only("should fetch exchange rates", () => {
   const resp = {
     data: {
       rates: {
