@@ -30,7 +30,7 @@ describe("ConverterForm tests", () => {
     optionArray.map((option) => expect(option).toBeInTheDocument());
   });
 
-  it("should 'Please choose your currency...' to be visible", () => {
+  it("should make 'Please choose your currency...' visible", () => {
     store = createStore(reducer, {
       currency: "",
       currencyList: [
@@ -47,7 +47,7 @@ describe("ConverterForm tests", () => {
     expect(text).toBeInTheDocument();
   });
 
-  it("should chosen currency to be visible", async () => {
+  it("should сhoose currency to be visible", async () => {
     store = createStore(reducer, {
       currency: "UAH",
       currencyList: [
